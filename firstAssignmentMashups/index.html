@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <title>
+      First Assignment
+    </title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <img src="nytimeslogo.png" class="topLogo" />
+    <div class="body-container">
+      <h1>Book Review Time Machine</h1>
+      <label for="start">For the week of:</label>
+      <input
+        type="date"
+        id="start"
+        name="trip-start"
+        value="2018-07-22"
+        min="2004-01-01"
+        max="2019-9-12"
+      /><br />
+      <input type="button" onclick="submitInput()" id="submitDate" />
+      <div id="testOutput"></div>
+    </div>
+  </body>
+  <script>
+    function submitInput() {
+      document.getElementById("testOutput").innerHTML = "<h1>" + "</h1>";
+      var inputName = document.getElementById("start").value;
+      console.log(inputName);
+      dateInfo = inputName.split("-");
+      window.api_url =
+        "https://api.nytimes.com/svc/books/v3/lists/" +
+        dateInfo[0] +
+        "-" +
+        dateInfo[1] +
+        "-" +
+        dateInfo[2] +
+        "/hardcover-fiction.json?api-key=gRqTGVtm3fPGGhNUpXftJQmfI3WX8jzl";
+      getData(api_url);
+    }
+
+    async function getData(api_url) {
+      const response = await fetch(api_url);
+      const data = await response.json();
+      for (var i = 0; i < data.results.books.length; i++) {
+        var bookImage = data.results.books[i].book_image;
+        console.log(bookImage);
+        document.getElementById("testOutput").innerHTML +=
+          '<div class="container"> <div class="card mb-4"> <div class="row no-gutters"> <div class="col-md-4"> <img src="' +
+          bookImage +
+          '" class="card-img" alt="...">' +
+          '</div><div class="col-md-8"><div class="card-body"> <h5 class="card-title"> ' +
+          data.results.books[i].title +
+          '</h5><div class="author">' +
+          data.results.books[i].author +
+          '</div><br> <p class="card-text">' +
+          data.results.books[i].description +
+          '</p><div class="row no-gutters buyLinks"> <div class="col-md-6">' +
+          '<a href="' +
+          data.results.books[i].buy_links[0].url +
+          '"><img src="amazonlogo.png"></a></div>' +
+          '<div class="col-md-6">' +
+          '<a href="' +
+          data.results.books[i].buy_links[1].url +
+          '"><img src="barnesandnoblelogo.png"></a></div>' +
+          "</div></div></div></div></div></div>";
+      }
+    }
+  </script>
+</html>

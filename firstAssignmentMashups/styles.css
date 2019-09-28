@@ -1,0 +1,40 @@
+body {
+  /* background-color: #747474; */
+}
+@font-face {
+  font-family: "Cheltenham";
+  src: url("./fonts/Cheltenham.otf");
+}
+
+.body-container {
+  text-align: center;
+  font-family: "Cheltenham";
+  /* color: white; */
+}
+
+.card-title {
+  margin: auto !important;
+}
+.topLogo {
+  /* display: inline; */
+  /* float: left; */
+  width: 10%;
+  margin: 2%;
+}
+
+.author {
+  font-size: 0.85rem;
+}
+
+.container {
+  position: relative;
+}
+
+.buyLinks {
+  position: absolute;
+  bottom: 0;
+}
+.buyLinks .col-md-6 a img {
+  width: 15%;
+  margin: 10%;
+}
