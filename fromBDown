@@ -1,0 +1,867 @@
+ if (m.id == 985 || prevAX > 0) {
+                    ofSetColor(0, 255, 0);
+                    string letter = letters.at(985);
+                    if (m.id == 985) {
+                        prevAX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                        prevAY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                    }
+                    ofVec2f centerPos = ofVec2f(prevAX, prevAY);
+                    font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+                    ofVec2f otherletter;
+                    float closestDistance, closestId;
+
+    //                ofVec2f
+                    ofVec2f vectors[aruco.getMarkers().size() - 1];
+                    ofVec2f directions[aruco.getMarkers().size() - 1];
+                    string ids[aruco.getMarkers().size() - 1];
+                    float distances[aruco.getMarkers().size() - 1];
+
+                    int counter = 0;
+
+                    for (auto other: aruco.getMarkers()) {
+    //                    cout<<other.id<<endl;
+                        if (other.id != 985) {
+    //                        cout<<"other loop: "<<other.id<<endl;
+    //                        ids[counter] = other.id;
+                            vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                            directions[counter] = vectors[counter] - centerPos;
+    //                        other.direction = vectors[counter] - centerPos;
+                            distances[counter] = directions[counter].length();
+                            int n = sizeof(distances)/sizeof(distances[0]);
+                            sort(distances, distances+n, greater<int>());
+                            other.distance = directions[counter].length();
+                            string otherLetter = letters.at(other.id);
+
+                            ofVec2f segment = directions[counter];
+                            ofVec2f otherDirection = directions[counter];
+
+                            if (other.distance <= 150 && other.id != 985 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                string middleLetter;
+                                string firstLetter;
+                                string lastLetter;
+                                
+                                for (auto i: threeLetter) {
+                                    firstLetter = i[0];
+                                    lastLetter = i[2];
+                                    if (firstLetter == letter && otherLetter == lastLetter) {
+                                        middleLetter = i[1];
+                                    }
+                                }
+                            
+                                segment /= 2;
+                                ofSetColor(145, 241, 233);
+                                font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                ofSetColor(255, 0, 0);
+                                }
+                                else if (other.distance > 150 && other.distance <= 300 && other.id != 985 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                    cout<<"hello"<<endl;
+                                    string secondLetter;
+                                    string thirdLetter;
+                                    string firstLetter;
+                                    string lastLetter;
+                                    cout<<otherDirection.y<<other.id<<endl;
+
+                                    for (auto i: fourLetter) {
+                                        firstLetter = i[0];
+                                        lastLetter = i[3];
+                                        if (firstLetter == letter && otherLetter == lastLetter) {
+                                            secondLetter = i[1];
+                                            thirdLetter = i[2];
+                                        }
+                                    }
+
+                                    segment /= 3;
+                                    ofSetColor(145, 241, 233);
+                                    font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                    font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                    ofSetColor(255, 0, 0);
+                                    }
+                            }
+                            counter++;
+                        }
+                    }
+                            if (m.id == 908 || prevDX > 0) {
+                                ofSetColor(0, 255, 0);
+                                string letter = letters.at(908);
+                                
+                                if (m.id == 908) {
+                                    prevDX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                                    prevDY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                                }
+                                
+                                
+                            ofVec2f centerPos = ofVec2f(prevDX, prevDY);
+                            font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+                            ofVec2f otherletter;
+                            float closestDistance, closestId;
+
+                            otherletter.set(mouseX,mouseY);
+                            ofVec2f vectors[aruco.getMarkers().size() - 1];
+                            ofVec2f directions[aruco.getMarkers().size() - 1];
+                            string ids[aruco.getMarkers().size() - 1];
+                            float distances[aruco.getMarkers().size() - 1];
+
+                            int counter = 0;
+
+                            for (auto other: aruco.getMarkers()) {
+            //                    cout<<other.id<<endl;
+                                if (other.id != 908) {
+            //                        cout<<"other loop: "<<other.id<<endl;
+            //                        ids[counter] = other.id;
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                    directions[counter] = vectors[counter] - centerPos;
+            //                        other.direction = vectors[counter] - centerPos;
+                                    distances[counter] = directions[counter].length();
+                                    int n = sizeof(distances)/sizeof(distances[0]);
+                                    sort(distances, distances+n, greater<int>());
+                                    other.distance = directions[counter].length();
+                                    string otherLetter = letters.at(other.id);
+
+                                    ofVec2f segment = directions[counter];
+                                    ofVec2f otherDirection = directions[counter];
+
+                                    if (other.distance <= 150 && other.id != 908 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        string middleLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        
+                                        for (auto i: threeLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[2];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                middleLetter = i[1];
+                                            }
+                                        }
+                                    
+                                        segment /= 2;
+                                        ofSetColor(253, 255, 152);
+                                        font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        ofSetColor(255, 0, 0);
+                                        }
+                                        else if (other.distance > 150 && other.distance <= 300 && other.id != 908 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            cout<<"hello"<<endl;
+                                            string secondLetter;
+                                            string thirdLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            cout<<otherDirection.y<<other.id<<endl;
+
+                                            for (auto i: fourLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[3];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    secondLetter = i[1];
+                                                    thirdLetter = i[2];
+                                                }
+                                            }
+
+                                            segment /= 3;
+                                            ofSetColor(253, 255, 152);
+                                            font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                            ofSetColor(255, 0, 0);
+                                            }
+                                    }
+                                    counter++;
+        //                        }
+                                }
+                            }
+                   if (m.id == 299 || prevEX > 0) {
+                       ofSetColor(0, 255, 0);
+                       string letter = letters.at(299);
+                       
+                       if (m.id == 299) {
+                           prevEX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                           prevEY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                       }
+                       
+                       ofVec2f centerPos = ofVec2f(prevEX, prevEY);
+                       font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+
+                        ofVec2f otherletter;
+                        float closestDistance, closestId;
+
+                        otherletter.set(mouseX,mouseY);
+        //                ofVec2f
+                        ofVec2f vectors[aruco.getMarkers().size() - 1];
+                        ofVec2f directions[aruco.getMarkers().size() - 1];
+                        string ids[aruco.getMarkers().size() - 1];
+                        float distances[aruco.getMarkers().size() - 1];
+
+                        int counter = 0;
+
+                        for (auto other: aruco.getMarkers()) {
+        //                    cout<<other.id<<endl;
+                            if (other.id != 299) {
+        //                        cout<<"other loop: "<<other.id<<endl;
+        //                        ids[counter] = other.id;
+                                vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                directions[counter] = vectors[counter] - centerPos;
+        //                        other.direction = vectors[counter] - centerPos;
+                                distances[counter] = directions[counter].length();
+                                int n = sizeof(distances)/sizeof(distances[0]);
+                                sort(distances, distances+n, greater<int>());
+                                other.distance = directions[counter].length();
+                                string otherLetter = letters.at(other.id);
+
+                                ofVec2f segment = directions[counter];
+                                ofVec2f otherDirection = directions[counter];
+
+                                if (other.distance <= 150 && other.id != 299 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                    string middleLetter;
+                                    string firstLetter;
+                                    string lastLetter;
+                                    
+                                    for (auto i: threeLetter) {
+                                        firstLetter = i[0];
+                                        lastLetter = i[2];
+                                        if (firstLetter == letter && otherLetter == lastLetter) {
+                                            middleLetter = i[1];
+                                        }
+                                    }
+                                
+                                    segment /= 2;
+                                    ofSetColor(190, 250, 171);
+                                    font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                    }
+                                    else if (other.distance > 150 && other.distance <= 300 && other.id != 299 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        cout<<"hello"<<endl;
+                                        string secondLetter;
+                                        string thirdLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        cout<<otherDirection.y<<other.id<<endl;
+
+                                        for (auto i: fourLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[3];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                secondLetter = i[1];
+                                                thirdLetter = i[2];
+                                            }
+                                        }
+
+                                        segment /= 3;
+                                        ofSetColor(190, 250, 171);
+                                        font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                        ofSetColor(255, 0, 0);
+                                        }
+                                }
+                                counter++;
+    //                        }
+                            }
+                        }
+                        if (m.id == 341 || prevTX > 0) {
+                            ofSetColor(0, 255, 0);
+                            string letter = letters.at(341);
+                            
+                            if (m.id == 341) {
+                                prevTX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                                prevTY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                            }
+                            
+                            ofVec2f centerPos = ofVec2f(prevTX, prevTY);
+                            font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+
+                            ofVec2f otherletter;
+                            float closestDistance, closestId;
+
+                            otherletter.set(mouseX,mouseY);
+            //                ofVec2f
+                            ofVec2f vectors[aruco.getMarkers().size() - 1];
+                            ofVec2f directions[aruco.getMarkers().size() - 1];
+                            string ids[aruco.getMarkers().size() - 1];
+                            float distances[aruco.getMarkers().size() - 1];
+
+                            int counter = 0;
+
+                            for (auto other: aruco.getMarkers()) {
+            //                    cout<<other.id<<endl;
+                                if (other.id != 341) {
+            //                        cout<<"other loop: "<<other.id<<endl;
+            //                        ids[counter] = other.id;
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                    directions[counter] = vectors[counter] - centerPos;
+            //                        other.direction = vectors[counter] - centerPos;
+                                    distances[counter] = directions[counter].length();
+                                    int n = sizeof(distances)/sizeof(distances[0]);
+                                    sort(distances, distances+n, greater<int>());
+                                    other.distance = directions[counter].length();
+                                    string otherLetter = letters.at(other.id);
+
+                                    ofVec2f segment = directions[counter];
+                                    ofVec2f otherDirection = directions[counter];
+
+                                    if (other.distance <= 150 && other.id != 341 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        string middleLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        
+                                        for (auto i: threeLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[2];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                middleLetter = i[1];
+                                            }
+                                        }
+                                    
+                                        segment /= 2;
+                                        ofSetColor(255, 148, 234);
+                                        font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        }
+                                        else if (other.distance > 150 && other.distance <= 300 && other.id != 341 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            cout<<"hello"<<endl;
+                                            string secondLetter;
+                                            string thirdLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            cout<<otherDirection.y<<other.id<<endl;
+
+                                            for (auto i: fourLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[3];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    secondLetter = i[1];
+                                                    thirdLetter = i[2];
+                                                }
+                                            }
+
+                                            segment /= 3;
+                                            ofSetColor(255, 148, 234);
+                                            font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                            ofSetColor(255, 0, 0);
+                                            }
+                                    }
+                                    counter++;
+        //                        }
+                                }
+                            }
+                        if (m.id == 64 || prevGX > 0) {
+                            ofSetColor(0, 255, 0);
+                            string letter = letters.at(64);
+                            
+                            if (m.id == 64) {
+                                prevGX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                                prevGY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                            }
+                            
+                            ofVec2f centerPos = ofVec2f(prevGX, prevGY);
+                            font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+                            ofVec2f otherletter;
+                            float closestDistance, closestId;
+
+                            otherletter.set(mouseX,mouseY);
+            //                ofVec2f
+                            ofVec2f vectors[aruco.getMarkers().size() - 1];
+                            ofVec2f directions[aruco.getMarkers().size() - 1];
+                            string ids[aruco.getMarkers().size() - 1];
+                            float distances[aruco.getMarkers().size() - 1];
+
+                            int counter = 0;
+
+                            for (auto other: aruco.getMarkers()) {
+            //                    cout<<other.id<<endl;
+                                if (other.id != 64) {
+            //                        cout<<"other loop: "<<other.id<<endl;
+            //                        ids[counter] = other.id;
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                    directions[counter] = vectors[counter] - centerPos;
+            //                        other.direction = vectors[counter] - centerPos;
+                                    distances[counter] = directions[counter].length();
+                                    int n = sizeof(distances)/sizeof(distances[0]);
+                                    sort(distances, distances+n, greater<int>());
+                                    other.distance = directions[counter].length();
+                                    string otherLetter = letters.at(other.id);
+
+                                    ofVec2f segment = directions[counter];
+                                    ofVec2f otherDirection = directions[counter];
+
+                                    if (other.distance <= 150 && other.id != 64 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        string middleLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        
+                                        for (auto i: threeLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[2];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                middleLetter = i[1];
+                                            }
+                                        }
+                                    
+                                        segment /= 2;
+                                        ofSetColor(245, 166, 89);
+                                        font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        ofSetColor(255, 0, 0);
+                                        }
+                                        else if (other.distance > 150 && other.distance <= 300 && other.id != 64 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            cout<<"hello"<<endl;
+                                            string secondLetter;
+                                            string thirdLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            cout<<otherDirection.y<<other.id<<endl;
+
+                                            for (auto i: fourLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[3];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    secondLetter = i[1];
+                                                    thirdLetter = i[2];
+                                                }
+                                            }
+
+                                            segment /= 3;
+                                            ofSetColor(245, 166, 89);
+                                            font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+                                            }
+                                    }
+                                    counter++;
+        //                        }
+                                }
+                            }
+                        if (m.id == 177 || prevNX > 0) {
+                            ofSetColor(0, 255, 0);
+                            string letter = letters.at(177);
+                            
+                            if (m.id == 177) {
+                                prevNX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                                prevNY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                            }
+                            
+                            ofVec2f centerPos = ofVec2f(prevNX, prevNY);
+                            font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+                            ofVec2f otherletter;
+                            float closestDistance, closestId;
+
+                            otherletter.set(mouseX,mouseY);
+            //                ofVec2f
+                            ofVec2f vectors[aruco.getMarkers().size() - 1];
+                            ofVec2f directions[aruco.getMarkers().size() - 1];
+                            string ids[aruco.getMarkers().size() - 1];
+                            float distances[aruco.getMarkers().size() - 1];
+
+                            int counter = 0;
+
+                            for (auto other: aruco.getMarkers()) {
+            //                    cout<<other.id<<endl;
+                                if (other.id != 177) {
+            //                        cout<<"other loop: "<<other.id<<endl;
+            //                        ids[counter] = other.id;
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                    directions[counter] = vectors[counter] - centerPos;
+            //                        other.direction = vectors[counter] - centerPos;
+                                    distances[counter] = directions[counter].length();
+                                    int n = sizeof(distances)/sizeof(distances[0]);
+                                    sort(distances, distances+n, greater<int>());
+                                    other.distance = directions[counter].length();
+                                    string otherLetter = letters.at(other.id);
+
+                                    ofVec2f segment = directions[counter];
+                                    ofVec2f otherDirection = directions[counter];
+
+                                    if (other.distance <= 150 && other.id != 177 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        string middleLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        
+                                        for (auto i: threeLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[2];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                middleLetter = i[1];
+                                            }
+                                        }
+                                    
+                                        segment /= 2;
+                                        ofSetColor(86, 77, 130);
+                                        font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        }
+                                        else if (other.distance > 150 && other.distance <= 300 && other.id != 177 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            cout<<"hello"<<endl;
+                                            string secondLetter;
+                                            string thirdLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            cout<<otherDirection.y<<other.id<<endl;
+
+                                            for (auto i: fourLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[3];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    secondLetter = i[1];
+                                                    thirdLetter = i[2];
+                                                }
+                                            }
+
+                                            segment /= 3;
+                                            ofSetColor(86, 77, 130);
+                                            font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+                                            }
+                                    }
+                                    counter++;
+        //                        }
+                                }
+                            }
+                        if (m.id == 428 || prevHX > 0) {
+                            ofSetColor(0, 255, 0);
+                            string letter = letters.at(428);
+                            
+                            if (m.id == 428) {
+                                prevHX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                                prevHY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                            }
+                            
+                            ofVec2f centerPos = ofVec2f(prevHX, prevHY);
+                            font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+
+                            ofVec2f otherletter;
+                            float closestDistance, closestId;
+
+                            otherletter.set(mouseX,mouseY);
+            //                ofVec2f
+                            ofVec2f vectors[aruco.getMarkers().size() - 1];
+                            ofVec2f directions[aruco.getMarkers().size() - 1];
+                            string ids[aruco.getMarkers().size() - 1];
+                            float distances[aruco.getMarkers().size() - 1];
+
+                            int counter = 0;
+
+                            for (auto other: aruco.getMarkers()) {
+            //                    cout<<other.id<<endl;
+                                if (other.id != 428) {
+            //                        cout<<"other loop: "<<other.id<<endl;
+            //                        ids[counter] = other.id;
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                    directions[counter] = vectors[counter] - centerPos;
+            //                        other.direction = vectors[counter] - centerPos;
+                                    distances[counter] = directions[counter].length();
+                                    int n = sizeof(distances)/sizeof(distances[0]);
+                                    sort(distances, distances+n, greater<int>());
+                                    other.distance = directions[counter].length();
+                                    string otherLetter = letters.at(other.id);
+
+                                    ofVec2f segment = directions[counter];
+                                    ofVec2f otherDirection = directions[counter];
+
+                                    if (other.distance <= 150 && other.id != 428 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        string middleLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        
+                                        for (auto i: threeLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[2];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                middleLetter = i[1];
+                                            }
+                                        }
+                                    
+                                        segment /= 2;
+                                        ofSetColor(211, 184, 168);
+                                        font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        }
+                                        else if (other.distance > 150 && other.distance <= 300 && other.id != 428 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            cout<<"hello"<<endl;
+                                            string secondLetter;
+                                            string thirdLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            cout<<otherDirection.y<<other.id<<endl;
+
+                                            for (auto i: fourLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[3];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    secondLetter = i[1];
+                                                    thirdLetter = i[2];
+                                                }
+                                            }
+
+                                            segment /= 3;
+                                            ofSetColor(211, 184, 168);
+                                            font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                            }
+                                    }
+                                    counter++;
+        //                        }
+                                }
+                            }
+                      if (m.id == 760 || prevSX > 0) {
+                          string letter = letters.at(760);
+                          
+                          if (m.id == 760) {
+                              prevSX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                              prevSY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                          }
+                          
+                          ofVec2f centerPos = ofVec2f(prevSX, prevSY);
+                          ofSetColor(0, 255, 0);
+                          font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+
+                            ofVec2f otherletter;
+                            float closestDistance, closestId;
+
+                            otherletter.set(mouseX,mouseY);
+            //                ofVec2f
+                            ofVec2f vectors[aruco.getMarkers().size() - 1];
+                            ofVec2f directions[aruco.getMarkers().size() - 1];
+                            string ids[aruco.getMarkers().size() - 1];
+                            float distances[aruco.getMarkers().size() - 1];
+
+                            int counter = 0;
+
+                            for (auto other: aruco.getMarkers()) {
+                                if (other.id != 760) {
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                    directions[counter] = vectors[counter] - centerPos;
+                                    distances[counter] = directions[counter].length();
+                                    int n = sizeof(distances)/sizeof(distances[0]);
+                                    sort(distances, distances+n, greater<int>());
+                                    other.distance = directions[counter].length();
+                                    string otherLetter = letters.at(other.id);
+
+                                    ofVec2f segment = directions[counter];
+                                    ofVec2f otherDirection = directions[counter];
+
+                                    if (other.distance <= 150 && other.id != 760 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                        string middleLetter;
+                                        string firstLetter;
+                                        string lastLetter;
+                                        
+                                        for (auto i: threeLetter) {
+                                            firstLetter = i[0];
+                                            lastLetter = i[2];
+                                            if (firstLetter == letter && otherLetter == lastLetter) {
+                                                middleLetter = i[1];
+                                            }
+                                        }
+                                    
+                                        segment /= 2;
+                                        ofSetColor(192, 4, 47);
+                                        font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                        }
+                                        else if (other.distance > 150 && other.distance <= 300 && other.id != 760 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            cout<<"hello"<<endl;
+                                            string secondLetter;
+                                            string thirdLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            cout<<otherDirection.y<<other.id<<endl;
+
+                                            for (auto i: fourLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[3];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    secondLetter = i[1];
+                                                    thirdLetter = i[2];
+                                                }
+                                            }
+
+                                            segment /= 3;
+                                            ofSetColor(192, 4, 47);
+                                            font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                            }
+                                    }
+                                    counter++;
+        //                        }
+                                }
+                            }
+                            if (m.id == 882 || prevRX > 0) {
+                                ofSetColor(0, 255, 0);
+                                string letter = letters.at(882);
+                                
+                                if (m.id == 882) {
+                                    prevRX = ofMap(m.getCenter().x, 0, 640, 0, ofGetWindowWidth());
+                                    prevRY = ofMap(m.getCenter().y, 0, 480, 0, ofGetWindowHeight());
+                                }
+                                ofVec2f centerPos = ofVec2f(prevRX, prevRY);
+
+                                font("AlphaFridgeMagnets", 24).drawString(letter, centerPos.x, centerPos.y);
+
+                                ofVec2f otherletter;
+                                float closestDistance, closestId;
+
+                                otherletter.set(mouseX,mouseY);
+                //                ofVec2f
+                                ofVec2f vectors[aruco.getMarkers().size() - 1];
+                                ofVec2f directions[aruco.getMarkers().size() - 1];
+                                string ids[aruco.getMarkers().size() - 1];
+                                float distances[aruco.getMarkers().size() - 1];
+
+                                int counter = 0;
+
+                                for (auto other: aruco.getMarkers()) {
+                //                    cout<<other.id<<endl;
+                                    if (other.id != 882) {
+                //                        cout<<"other loop: "<<other.id<<endl;
+                //                        ids[counter] = other.id;
+                                    vectors[counter].set(ofMap(other.getCenter().x, 0, 640, 0, ofGetWindowWidth()), ofMap(other.getCenter().y, 0, 480, 0, ofGetWindowHeight()));
+                                        directions[counter] = vectors[counter] - centerPos;
+                //                        other.direction = vectors[counter] - centerPos;
+                                        distances[counter] = directions[counter].length();
+                                        int n = sizeof(distances)/sizeof(distances[0]);
+                                        sort(distances, distances+n, greater<int>());
+                                        other.distance = directions[counter].length();
+                                        string otherLetter = letters.at(other.id);
+
+                                        ofVec2f segment = directions[counter];
+                                        ofVec2f otherDirection = directions[counter];
+
+                                        if (other.distance <= 150 && other.id != 882 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                            string middleLetter;
+                                            string firstLetter;
+                                            string lastLetter;
+                                            
+                                            for (auto i: threeLetter) {
+                                                firstLetter = i[0];
+                                                lastLetter = i[2];
+                                                if (firstLetter == letter && otherLetter == lastLetter) {
+                                                    middleLetter = i[1];
+                                                }
+                                            }
+                                        
+                                            segment /= 2;
+                                            ofSetColor(255, 134, 184);
+                                            font("AlphaFridgeMagnets", 18).drawString(middleLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                            ofSetColor(255, 0, 0);
+                                            }
+                                            else if (other.distance > 150 && other.distance <= 300 && other.id != 882 && otherDirection.x < 30 && otherDirection.y < 30) {
+                                                cout<<"hello"<<endl;
+                                                string secondLetter;
+                                                string thirdLetter;
+                                                string firstLetter;
+                                                string lastLetter;
+                                                cout<<otherDirection.y<<other.id<<endl;
+
+                                                for (auto i: fourLetter) {
+                                                    firstLetter = i[0];
+                                                    lastLetter = i[3];
+                                                    if (firstLetter == letter && otherLetter == lastLetter) {
+                                                        secondLetter = i[1];
+                                                        thirdLetter = i[2];
+                                                    }
+                                                }
+
+                                                segment /= 3;
+                                                ofSetColor(255, 134, 184);
+                                                font("AlphaFridgeMagnets", 18).drawString(secondLetter, centerPos.x+(segment.x), centerPos.y+(segment.y));
+                                                font("AlphaFridgeMagnets", 18).drawString(thirdLetter, centerPos.x+(segment.x * 2), centerPos.y+(segment.y * 2));
+
+                                                ofSetColor(255, 0, 0);
+                                                }
+                                        }
+                                        counter++;
+            //                        }
+                                    }
+                                }
+                }
+//        font("AlphaFridgeMagnets", 80).drawString("Hello!", 200, 200);
+
+    }
+
+    ofSetColor(255);
+    ofDrawBitmapString("markers detected: " + ofToString(aruco.getNumMarkers()), 20, 160);
+    ofDrawBitmapString("fps " + ofToString(ofGetFrameRate()), 20, 180);
+    ofDrawBitmapString("m toggles markers", 20, 60);
+    ofDrawBitmapString("b toggles board", 20, 80);
+    ofDrawBitmapString("i toggles board image", 20, 100);
+    ofDrawBitmapString("s saves board image", 20, 120);
+    ofDrawBitmapString("0-9 saves marker image", 20, 140);
+}
+
+
+bool ofApp::movePoint(vector<ofVec2f>& points, ofVec2f point) {
+    for(int i = 0; i < points.size(); i++) {
+        if(points[i].distance(point) < 20) {
+            movingPoint = true;
+            curPoint = &points[i];
+            return true;
+        }
+    }
+    return false;
+}
+
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key){
+	if (key == 'm') showMarkers = !showMarkers;
+	if (key == 'b') showBoard = !showBoard;
+	if (key == 'i') showBoardImage = !showBoardImage;
+	if (key == 'l') board.save("boardimage.png");
+	if (key >= '0' && key <= '9') {
+		// there's 1024 different markers
+		int markerID = key - '0';
+        aruco.getMarkerImage(markerID, 240, marker);
+		marker.save("marker" + ofToString(markerID) + ".png");
+	}
+    if(key == 's') {
+        saveMatrix = true;
+    }
+    if(key == 'n') {
+        settingNewPoints = true;
+    }
+}
+
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseMoved(int x, int y ){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button){
+    if(movingPoint) {
+        curPoint->set(x, y);
+    }
+}
+
+//--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button){
+    ofVec2f cur(x, y);
+    ofVec2f rightOffset(warpedColor.getWidth(), 0);
+    movePoint(srcPoints, cur);
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseReleased(int x, int y, int button){
+    movingPoint = false;
+}
+
+//--------------------------------------------------------------
+void ofApp::windowResized(int w, int h){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::gotMessage(ofMessage msg){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo){
+
+}
